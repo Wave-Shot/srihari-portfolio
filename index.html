@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Srihari V's Portfolio | AI/ML Engineer & Full-Stack Developer</title>
+    <title>Srihari V's Interactive Portfolio | AI/ML Engineer & Full-Stack Developer</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configure Tailwind theme, using Inter font and custom colors -->
@@ -15,10 +15,9 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        // Updated for Dark Theme contrast
                         'primary': '#818CF8', // Indigo 400 - Main accent, pops on dark
                         'secondary': '#22D3EE', // Cyan 400 - Vibrant contrast
-                        'dark-bg-main': '#121212', // Very dark background
+                        'dark-bg-main': '#121212', // Very dark base background
                         'dark-bg-card': '#1F2937', // Dark Gray 800 - for sections and cards
                         'light-text': '#F3F4F6', // Light text color
                         'muted-text': '#D1D5DB', // Gray 300 - Secondary text color
@@ -28,13 +27,35 @@
         }
     </script>
     <style>
-        /* Custom styles for professional feel and scroll behavior (DARK THEME) */
+        /* Custom styles for professional feel and HORIZONTAL SCROLLING */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #121212; /* Very dark base background */
             color: #F3F4F6;
+            /* Disable default vertical scroll on the body */
+            overflow-y: hidden;
+            overflow-x: hidden; /* Prevent body scroll, controlled by container */
+        }
+        
+        /* The container for the sections, handles the horizontal snapping */
+        #page-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
         }
 
+        /* Each section is a full viewport width/height panel */
+        .page-section {
+            flex: 0 0 100vw; /* Fixed width of one viewport width */
+            scroll-snap-align: start;
+            padding-top: 6rem; /* Space for the sticky header */
+            padding-bottom: 4rem;
+            min-height: 100vh;
+        }
+        
         /* Styling for the navigation links on hover */
         .nav-link {
             transition: color 0.2s ease-in-out;
@@ -86,6 +107,8 @@
             border-radius: 50%;
             border: 2px solid #121212; /* Matches body background */
         }
+        
+        /* Removed old parallax styles, kept only core custom styles */
     </style>
 </head>
 <body class="antialiased">
@@ -94,15 +117,16 @@
     <nav class="sticky top-0 z-50 bg-dark-bg-card shadow-2xl border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo/Name (Now empty as requested) -->
-                <a href="#home" class="text-2xl font-bold text-light-text tracking-tight"></a>
+                <!-- Logo/Name -->
+                <a href="#home" class="text-2xl font-bold text-light-text tracking-tight" data-target="home">SRIHARI V</a>
                 
-                <!-- Desktop Links -->
+                <!-- Desktop Links (Controls horizontal scrolling) -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="#about" class="nav-link text-muted-text font-medium hover:text-primary">About</a>
-                    <a href="#skills" class="nav-link text-muted-text font-medium hover:text-primary">Skills</a>
-                    <a href="#projects" class="nav-link text-muted-text font-medium hover:text-primary">Projects</a>
-                    <a href="#contact" class="nav-link text-muted-text font-medium hover:text-primary">Contact</a>
+                    <a href="#home" class="nav-link text-muted-text font-medium hover:text-primary active-section" data-target="home">Home</a>
+                    <a href="#about" class="nav-link text-muted-text font-medium hover:text-primary" data-target="about">About</a>
+                    <a href="#skills" class="nav-link text-muted-text font-medium hover:text-primary" data-target="skills">Skills</a>
+                    <a href="#projects" class="nav-link text-muted-text font-medium hover:text-primary" data-target="projects">Projects</a>
+                    <a href="#contact" class="nav-link text-muted-text font-medium hover:text-primary" data-target="contact">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -115,112 +139,128 @@
         <!-- Mobile Menu (Hidden by default) -->
         <div id="mobile-menu" class="hidden sm:hidden pb-4 pt-2 bg-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">About</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">Skills</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">Projects</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">Contact</a>
+                <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700" data-target="home">Home</a>
+                <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700" data-target="about">About</a>
+                <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700" data-target="skills">Skills</a>
+                <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700" data-target="projects">Projects</a>
+                <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700" data-target="contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Main Content Container for Horizontal Scrolling -->
+    <div id="page-container">
 
-        <!-- 1. Hero Section (Dark Card) -->
-        <section id="home" class="py-16 md:py-24 flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 bg-dark-bg-card rounded-3xl shadow-2xl shadow-indigo-900/10 p-8 lg:p-12 border-b-8 border-primary/50">
-            <div class="md:w-3/5">
-                <p class="text-lg text-secondary font-bold mb-3 tracking-widest uppercase">Hello, I'm Srihari V</p>
-                <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight text-light-text">
-                    AI/ML Engineer & <br class="hidden sm:inline" />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-300">Application Developer</span>
-                </h1>
-                <p class="mt-6 text-xl text-muted-text max-w-lg">
-                    A B.Tech Innovator specializing in AI/ML, NLP, and Full-Stack Development. I build intelligent, data-driven applications using BERT, Streamlit, FastAPI, and the Gemini API.
-                </p>
-                <!-- Actions: View Projects and Download Resume. Subtle button shadows (shadow-md) -->
-                <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#projects" class="px-8 py-3 bg-primary text-light-text font-semibold rounded-xl shadow-md hover:bg-indigo-500 transition duration-300 transform hover:scale-105 text-center border-2 border-primary">View Projects</a>
-                    
-                    <!-- Download Resume Button: Subtle shadow, no glow -->
-                    <a href="Srihari_Resume_main.pdf" download="Srihari_V_Resume.pdf" class="px-8 py-3 bg-secondary text-light-text font-semibold rounded-xl shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-105 flex items-center justify-center text-center border-2 border-secondary">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Download Resume
-                    </a>
-                </div>
-            </div>
-            <!-- Profile Placeholder (Avatar style) -->
-            <div class="md:w-1/4 w-full flex justify-center">
-                <div class="w-48 h-48 bg-secondary/10 rounded-full shadow-2xl shadow-secondary/20 flex items-center justify-center border-4 border-secondary">
-                    <span class="text-7xl font-extrabold text-secondary">SV</span>
-                </div>
-            </div>
-        </section>
+        <!-- 1. Hero Section (Home) - Interactive with Network Canvas -->
+        <section id="home" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+            
+            <!-- Hero Wrapper: Now a flex container to vertically center content -->
+            <div class="hero-section-inner relative overflow-hidden h-[450px] md:h-[550px] flex items-center justify-center rounded-3xl shadow-2xl shadow-indigo-900/10 border-b-8 border-primary/50 bg-dark-bg-card">
 
-        <div class="border-t border-gray-700 my-16"></div>
+                <!-- The Interactive Canvas Background (New Graphic UI) -->
+                <canvas id="network-canvas" class="absolute inset-0"></canvas>
 
-        <!-- 2. About Section (Dark Card) -->
-        <section id="about" class="py-16 bg-dark-bg-card rounded-3xl shadow-xl shadow-indigo-900/10 p-8 lg:p-12">
-            <h2 class="text-3xl font-bold text-light-text mb-12 section-title">About Me & My Journey</h2>
-            <div class="grid md:grid-cols-3 gap-10 items-start">
-                <div class="md:col-span-2">
-                    <p class="text-lg text-muted-text leading-relaxed mb-4">
-                        I am a passionate 4th-year B.Tech student at SRM Institute of Science And Technology (CGPA: 8.06), driven by a deep interest in transforming complex data into robust, user-friendly applications. My academic journey has provided a strong foundation in Python, Java, C/C++, and key frameworks.
-                    </p>
-                    <!-- Markdown bolding removed, visual emphasis added via span -->
-                    <p class="text-lg text-muted-text leading-relaxed mb-4">
-                        My core expertise lies in the cross-section of <span class="font-semibold text-primary/80">AI/ML and full-stack development</span>. I focus on designing and deploying intelligent agents and data dashboards using cutting-edge models like <span class="font-semibold text-primary/80">BERT, YOLOv8, and API integration technologies</span> such as the Gemini API and FastAPI.
-                    </p>
-                    
-                    <!-- My Journey Flowchart -->
-                    <div class="mt-12">
-                        <h3 class="text-2xl font-semibold text-light-text mb-6 border-b pb-2 border-gray-700">Educational Path</h3>
-                        <div class="flex flex-col">
-                            <div class="journey-item">
-                                <p class="text-base font-bold text-primary">DAV Boys Senior Secondary School</p>
-                                <p class="text-sm text-muted-text">Completed 10th grade foundation.</p>
-                            </div>
-                            <div class="journey-item">
-                                <p class="text-base font-bold text-primary">Chennai Public School</p>
-                                <p class="text-sm text-muted-text">Completed 12th grade intermediate studies.</p>
-                            </div>
-                            <div class="journey-item">
-                                <p class="text-base font-bold text-primary">SRM Institute of Science and Technology</p>
-                                <p class="text-sm text-muted-text">B.Tech, currently focused on AI/ML and development.</p>
+                <!-- 2. The Main Content (Foreground) -->
+                <!-- Guaranteed Z-Index 20 to sit above all canvas layers -->
+                <div class="relative z-20 w-full max-w-6xl p-4 md:p-8 bg-dark-bg-card/70 backdrop-blur-sm rounded-2xl">
+                    <!-- The Content block that holds the text and avatar -->
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
+                        <div class="md:w-3/5 text-center md:text-left">
+                            <p class="text-lg text-secondary font-bold mb-3 tracking-widest uppercase">Hello, I'm Srihari V</p>
+                            <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight text-light-text">
+                                AI/ML Engineer & <br class="hidden sm:inline" />
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-300">Application Developer</span>
+                            </h1>
+                            <p class="mt-6 text-xl text-muted-text max-w-lg md:mx-0 mx-auto">
+                                A B.Tech Innovator specializing in <span class="font-semibold text-secondary">AI/ML, NLP, and Full-Stack Development</span>. I build intelligent, data-driven applications.
+                            </p>
+                            
+                            <!-- Actions: Only View Projects remains here -->
+                            <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
+                                <a href="#projects" class="scroll-link px-8 py-3 bg-primary text-light-text font-semibold rounded-xl shadow-md hover:bg-indigo-500 transition duration-300 transform hover:scale-105 text-center border-2 border-primary" data-target="projects" id="projects-cta-btn">View Projects</a>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mt-8 text-sm text-muted-text space-y-1 p-4 bg-primary/10 rounded-lg border border-primary/30">
-                        <p><span class="font-semibold">Education:</span> B.Tech (4th Year), SRM Institute of Science And Technology</p>
-                        <p><span class="font-semibold">Certifications:</span> Fortinet Certified Associate in Cybersecurity, Alteryx Designer Core, AWS Machine Learning Foundations, MATLAB Image Processing.</p>
-                        <p><span class="font-semibold">Awards:</span> First Prize, Idea Fest (Blockchain); First Prize, Energy Harvesting Model.</p>
+                        <!-- Profile Placeholder & Resume Link - MODIFIED TO STACK VERTICALLY -->
+                        <div class="md:w-1/4 w-full flex flex-col items-center justify-center space-y-6">
+                            <div class="w-48 h-48 bg-secondary/10 rounded-full shadow-2xl shadow-secondary/20 flex items-center justify-center border-4 border-secondary">
+                                <span class="text-7xl font-extrabold text-secondary">SV</span>
+                            </div>
+                            
+                            <!-- View Resume Button moved here -->
+                            <a href="https://drive.google.com/file/d/1JHMuGLF6EKXkqk2Z-10Xn3Wijhx1S75b/view?usp=sharing" target="_blank" class="w-full max-w-[200px] px-6 py-2 bg-secondary text-light-text font-semibold rounded-xl shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.05] flex items-center justify-center text-center text-sm border-2 border-secondary">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                View Resume
+                            </a>
+                        </div>
                     </div>
-
                 </div>
-                <div class="md:col-span-1 bg-dark-bg-main p-6 rounded-xl shadow-xl shadow-secondary/10 border border-secondary/30">
-                    <h3 class="text-xl font-bold mb-4 text-secondary border-b pb-2 border-secondary/50">Contact Details</h3>
-                    <ul class="space-y-4 text-light-text">
-                        <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                            <p class="font-medium text-light-text">Email:</p>
-                            <a href="mailto:stiharivenkat@gmail.com" class="text-primary hover:underline font-bold">stiharivenkat@gmail.com</a>
-                        </li>
-                        <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                            <p class="font-medium text-light-text">LinkedIn:</p>
-                            <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-primary hover:underline font-bold">Connect on LinkedIn</a>
-                        </li>
-                        <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                            <p class="font-medium text-light-text">GitHub:</p>
-                            <a href="https://github.com/Wave-Shot" target="_blank" class="text-primary hover:underline font-bold">github/Wave-Shot</a>
-                        </li>
-                    </ul>
+
+            </div>
+        </section>
+
+        <!-- 2. About Section (UNCHANGED) -->
+        <section id="about" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+            <div class="bg-dark-bg-card rounded-3xl shadow-xl shadow-indigo-900/10 p-8 lg:p-12">
+                <h2 class="text-3xl font-bold text-light-text mb-12 section-title">About Me & My Journey</h2>
+                <div class="grid md:grid-cols-3 gap-10 items-start">
+                    <div class="md:col-span-2">
+                        <p class="text-lg text-muted-text leading-relaxed mb-4">
+                            I am a passionate 4th-year B.Tech student at SRM Institute of Science And Technology (CGPA: <span class="font-bold text-primary">8.06</span>), driven by a deep interest in transforming complex data into robust, user-friendly applications. My academic journey has provided a strong foundation in <span class="font-semibold text-primary/80">Python, Java, C/C++</span>, and key frameworks.
+                        </p>
+                        <p class="text-lg text-muted-text leading-relaxed mb-4">
+                            My core expertise lies in the cross-section of <span class="font-semibold text-primary/80">AI/ML and full-stack development</span>. I focus on designing and deploying intelligent agents and data dashboards using cutting-edge models like <span class="font-semibold text-primary/80">BERT, YOLOv8, and API integration technologies</span> such as the <span class="font-semibold text-primary/80">Gemini API</span> and <span class="font-semibold text-primary/80">FastAPI</span>.
+                        </p>
+                        
+                        <!-- My Journey Flowchart -->
+                        <div class="mt-12">
+                            <h3 class="text-2xl font-semibold text-light-text mb-6 border-b pb-2 border-gray-700">Educational Path</h3>
+                            <div class="flex flex-col">
+                                <div class="journey-item">
+                                    <p class="text-base font-bold text-primary">DAV Boys Senior Secondary School</p>
+                                    <p class="text-sm text-muted-text">Completed 10th grade foundation.</p>
+                                </div>
+                                <div class="journey-item">
+                                    <p class="text-base font-bold text-primary">Chennai Public School</p>
+                                    <p class="text-sm text-muted-text">Completed 12th grade intermediate studies.</p>
+                                </div>
+                                <div class="journey-item">
+                                    <p class="text-base font-bold text-primary">SRM Institute of Science and Technology</p>
+                                    <p class="text-sm text-muted-text">B.Tech, currently focused on AI/ML and development.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 text-sm text-muted-text space-y-1 p-4 bg-primary/10 rounded-lg border border-primary/30">
+                            <p><span class="font-semibold">Education:</span> B.Tech (4th Year), SRM Institute of Science And Technology</p>
+                            <p><span class="font-semibold">Certifications:</span> Fortinet Certified Associate in Cybersecurity, Alteryx Designer Core, AWS Machine Learning Foundations, MATLAB Image Processing.</p>
+                            <p><span class="font-semibold">Awards:</span> First Prize, Idea Fest (Blockchain); First Prize, Energy Harvesting Model.</p>
+                        </div>
+
+                    </div>
+                    <div class="md:col-span-1 bg-dark-bg-main p-6 rounded-xl shadow-xl shadow-secondary/10 border border-secondary/30">
+                        <h3 class="text-xl font-bold mb-4 text-secondary border-b pb-2 border-secondary/50">Contact Details</h3>
+                        <ul class="space-y-4 text-light-text">
+                            <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                                <p class="font-medium text-light-text">Email:</p>
+                                <a href="mailto:stiharivenkat@gmail.com" class="text-primary hover:underline font-bold">stiharivenkat@gmail.com</a>
+                            </li>
+                            <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                                <p class="font-medium text-light-text">LinkedIn:</p>
+                                <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-primary hover:underline font-bold">Connect on LinkedIn</a>
+                            </li>
+                            <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                                <p class="font-medium text-light-text">GitHub:</p>
+                                <a href="https://github.com/Wave-Shot" target="_blank" class="text-primary hover:underline font-bold">github/Wave-Shot</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="border-t border-gray-700 my-16"></div>
-
-        <!-- 3. Skills Section -->
-        <section id="skills" class="py-16">
+        <!-- 3. Skills Section (UNCHANGED) -->
+        <section id="skills" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
             <h2 class="text-3xl font-bold text-light-text mb-12 section-title">Core Competencies</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
 
@@ -278,10 +318,8 @@
             </div>
         </section>
 
-        <div class="border-t border-gray-700 my-16"></div>
-
-        <!-- 4. Projects Section -->
-        <section id="projects" class="py-16">
+        <!-- 4. Projects Section (UNCHANGED) -->
+        <section id="projects" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
             <h2 class="text-3xl font-bold text-light-text mb-12 section-title">Featured Projects</h2>
             <div class="space-y-12">
                 
@@ -324,94 +362,302 @@
             </div>
         </section>
 
-        <div class="border-t border-gray-700 my-16"></div>
+        <!-- 5. Contact Section (UNCHANGED) -->
+        <section id="contact" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+            <div class="bg-dark-bg-card rounded-3xl shadow-xl shadow-cyan-900/10 px-4 sm:px-12 py-12 border-t-8 border-secondary/50">
+                <h2 class="text-3xl font-bold text-light-text mb-8 section-title">Let's Connect</h2>
+                <p class="text-xl text-muted-text mb-10">
+                    I'm actively seeking roles and collaborations where I can apply my skills in AI/ML and application development. Feel free to reach out!
+                </p>
 
-        <!-- 5. Contact Section -->
-        <section id="contact" class="py-16 bg-dark-bg-card rounded-3xl shadow-xl shadow-cyan-900/10 px-4 sm:px-12 border-t-8 border-secondary/50">
-            <h2 class="text-3xl font-bold text-light-text mb-8 section-title">Let's Connect</h2>
-            <p class="text-xl text-muted-text mb-10">
-                I'm actively seeking roles and collaborations where I can apply my skills in AI/ML and application development. Feel free to reach out!
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-10">
-                
-                <!-- Contact Details -->
-                <div>
-                    <h3 class="text-2xl font-bold text-primary mb-4">Contact Information</h3>
-                    <div class="p-6 rounded-xl bg-dark-bg-main border border-secondary/30 space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h12a2 2 0 002-2v-7"></path></svg>
-                            <div>
-                                <p class="text-sm font-semibold text-muted-text">Email Address</p>
-                                <a href="mailto:stiharivenkat@gmail.com" class="text-lg text-primary hover:text-indigo-500 font-bold break-all">stiharivenkat@gmail.com</a>
+                <div class="grid md:grid-cols-2 gap-10">
+                    
+                    <!-- Contact Details -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4">Contact Information</h3>
+                        <div class="p-6 rounded-xl bg-dark-bg-main border border-secondary/30 space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h12a2 2 0 002-2v-7M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                <div>
+                                    <p class="text-sm font-semibold text-muted-text">Email Address</p>
+                                    <a href="mailto:stiharivenkat@gmail.com" class="text-lg text-primary hover:text-indigo-500 font-bold break-all">stiharivenkat@gmail.com</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            <div>
-                                <p class="text-sm font-semibold text-muted-text">LinkedIn Profile</p>
-                                <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-lg text-primary hover:text-indigo-500 font-bold">Connect Here</a>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                <div>
+                                    <p class="text-sm font-semibold text-muted-text">LinkedIn Profile</p>
+                                    <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-lg text-primary hover:text-indigo-500 font-bold">Connect Here</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Message Form -->
-                <div>
-                    <h3 class="text-2xl font-bold text-primary mb-4">Send Me a Message</h3>
-                    <form id="contact-form" class="space-y-4 p-6 bg-dark-bg-main rounded-xl border border-primary/30">
-                        <div>
-                            <label for="name" class="block text-sm font-bold text-muted-text">Your Name</label>
-                            <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-bold text-muted-text">Your Email</label>
-                            <input type="email" id="sender-email" name="sender-email" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-bold text-muted-text">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary"></textarea>
-                        </div>
-                        
-                        <!-- Contact Button: Subtle shadow, no glow -->
-                        <button type="submit" class="w-full px-4 py-3 bg-secondary text-light-text font-semibold rounded-lg shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.01]">
-                            Send Email Notification
-                        </button>
+                    <!-- Message Form -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4">Send Me a Message</h3>
+                        <form id="contact-form" class="space-y-4 p-6 bg-dark-bg-main rounded-xl border border-primary/30">
+                            <div>
+                                <label for="name" class="block text-sm font-bold text-muted-text">Your Name</label>
+                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-muted-text">Your Email</label>
+                                <input type="email" id="sender-email" name="sender-email" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-bold text-muted-text">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary"></textarea>
+                            </div>
+                            
+                            <!-- Contact Button: Subtle shadow, no glow -->
+                            <button type="submit" class="w-full px-4 py-3 bg-secondary text-light-text font-semibold rounded-lg shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.01]">
+                                Send Email Notification
+                            </button>
 
-                        <p id="form-message" class="text-center text-sm font-medium text-gray-400 hidden mt-3"></p>
-                    </form>
+                            <p id="form-message" class="text-center text-sm font-medium text-gray-400 hidden mt-3"></p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
 
-    </main>
+    </div> <!-- End of #page-container -->
 
-    <!-- Footer (Dark) -->
-    <footer class="bg-dark-bg-card text-muted-text py-8 mt-16 border-t border-gray-700">
+    <!-- Footer -->
+    <footer class="fixed bottom-0 left-0 w-full bg-dark-bg-card text-muted-text py-4 z-40 border-t border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-sm">&copy; 2025 Srihari V. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu Toggle and Mailto Form Handling -->
+    <!-- JavaScript for Navigation, Form Handling, and Interactive Canvas -->
     <script>
-        // Mobile Menu Toggle
+        // --- Navigation Logic for Horizontal Scroll ---
+        const pageContainer = document.getElementById('page-container');
+        // Define the order of sections for accurate scrolling
+        const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .scroll-link');
+        
+        // Function to scroll horizontally to a target section
+        function scrollToSection(targetId) {
+            // data-target is used for internal navigation
+            const targetElement = document.getElementById(targetId);
+            if(targetElement) {
+                 targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'start'
+                });
+            }
+        }
+        
+        // Add click listeners to all navigational elements
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Check if the link is a non-internal link (like the PDF link)
+                if (this.hasAttribute('data-target')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    if (targetId) {
+                        scrollToSection(targetId);
+                    }
+                    
+                    // Close mobile menu after clicking a link
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // --- Mobile Menu Toggle ---
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
 
-        // Close mobile menu on link click
-        document.querySelectorAll('a[href^="#"]').forEach(item => {
-            item.addEventListener('click', () => {
-                const menu = document.getElementById('mobile-menu');
-                if (!menu.classList.contains('hidden')) {
-                    menu.classList.add('hidden');
-                }
-            });
-        });
 
-        // Form Submission Handler
+        // --- Interactive Network Canvas Graphic Logic (New Interactive UI) ---
+        const canvas = document.getElementById('network-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let nodes = [];
+            let mouse = { x: null, y: null };
+            let animationFrameId;
+
+            const maxDistance = 120; // Max distance for lines
+            const numNodes = 60; // Number of particles
+
+            // Particle/Node Class
+            class Node {
+                constructor(x, y, radius) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                    // Assign random velocities for gentle drifting
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.5) * 0.4;
+                    this.color = '#818CF8'; // Primary color
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                update() {
+                    // Reverse direction if hitting boundaries
+                    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                        this.vx = -this.vx;
+                    }
+                    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                        this.vy = -this.vy;
+                    }
+
+                    // Apply gentle movement
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    // Mouse repulsion logic: nodes move away from the cursor
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = this.x - mouse.x;
+                        const dy = this.y - mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const repulsionRadius = 100;
+                        const strength = 10;
+
+                        if (distance < repulsionRadius) {
+                            const angle = Math.atan2(dy, dx);
+                            // Calculate force: stronger closer to the mouse
+                            const force = (repulsionRadius - distance) / repulsionRadius * strength;
+                            
+                            this.x += Math.cos(angle) * force * 0.2;
+                            this.y += Math.sin(angle) * force * 0.2;
+                        }
+                    }
+
+                    this.draw();
+                }
+            }
+
+            // Initialization function
+            function initNodes() {
+                nodes = [];
+                for (let i = 0; i < numNodes; i++) {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const radius = Math.random() * 2 + 1; // 1 to 3 pixels
+                    nodes.push(new Node(x, y, radius));
+                }
+            }
+
+            // Function to handle resizing
+            function resizeCanvas() {
+                // Resize the canvas element to match its parent container size
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                initNodes(); // Reinitialize nodes after resize
+            }
+            
+            // Add resize listener
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Initial call to set size and particles
+            resizeCanvas(); 
+
+            // Animation Loop
+            function animate() {
+                animationFrameId = requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = 0; i < nodes.length; i++) {
+                    nodes[i].update();
+                    
+                    // Connect nodes with Primary color
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x;
+                        const dy = nodes[i].y - nodes[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < maxDistance) {
+                            // Calculate opacity based on distance
+                            const opacity = 1 - (distance / maxDistance);
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(129, 140, 248, ${opacity * 0.7})`; // Primary color, semi-transparent
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.stroke();
+                            ctx.closePath();
+                        }
+                    }
+                    
+                    // Connect node to mouse with Secondary color (for interaction emphasis)
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = nodes[i].x - mouse.x;
+                        const dy = nodes[i].y - mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < maxDistance) {
+                            const opacity = 1 - (distance / maxDistance);
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(34, 211, 238, ${opacity * 0.9})`; // Secondary color for mouse lines
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+
+            // Mouse Position Tracking
+            canvas.addEventListener('mousemove', function(e) {
+                // Update mouse position relative to the canvas
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            // Reset mouse position when cursor leaves the canvas
+            canvas.addEventListener('mouseout', function() {
+                mouse.x = null;
+                mouse.y = null;
+            });
+            
+            // Intersection Observer to stop/start animation when not visible (Horizontal Scroll Optimization)
+            const homeSection = document.getElementById('home');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Only start if not already running
+                        if (!animationFrameId) {
+                            animate();
+                        }
+                    } else {
+                        // Stop animation when the home section is out of view
+                        cancelAnimationFrame(animationFrameId);
+                        animationFrameId = null;
+                    }
+                });
+            }, {
+                // Use the page container as the root to detect horizontal visibility
+                root: pageContainer, 
+                threshold: 0.99
+            });
+            
+            observer.observe(homeSection);
+        } // End of Canvas Logic
+
+
+        // --- Form Submission Handler (Mailto - UNCHANGED) ---
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -420,8 +666,8 @@
             const message = document.getElementById('message').value;
             const formMessage = document.getElementById('form-message');
             
-            // Recipient Email (Your address)
-            const recipientEmail = 'stiharivenkat@gmail.com';
+            // The recipient email from the resume content
+            const recipientEmail = 'stiharivenkat@gmail.com'; 
             
             // Construct Subject and Body for mailto
             const subject = encodeURIComponent(`Portfolio Message from ${name}`);
