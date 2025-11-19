@@ -487,16 +487,18 @@
             let mouse = { x: null, y: null };
             let animationFrameId;
 
-            const maxDistance = 120; // Max distance for lines
-            const numNodes = 60; // Number of particles
+            // --- BOOSTED INTERACTIVITY PARAMETERS ---
+            const maxDistance = 200; // Increased connection reach for denser net
+            const numNodes = 120;    // Doubled the number of particles for a busier graphic
+            // ----------------------------------------
 
             // Particle/Node Class
             class Node {
                 constructor(x, y, radius) {
                     this.x = x;
                     this.y = y;
-                    this.radius = radius;
-                    // Assign random velocities for gentle drifting
+                    // Boosted particle size range (1.5 to 3.5 pixels)
+                    this.radius = Math.random() * 2 + 1.5;
                     this.vx = (Math.random() - 0.5) * 0.4;
                     this.vy = (Math.random() - 0.5) * 0.4;
                     this.color = '#818CF8'; // Primary color
@@ -551,7 +553,7 @@
                 for (let i = 0; i < numNodes; i++) {
                     const x = Math.random() * canvas.width;
                     const y = Math.random() * canvas.height;
-                    const radius = Math.random() * 2 + 1; // 1 to 3 pixels
+                    const radius = Math.random() * 2 + 1.5; // Use boosted radius for consistency
                     nodes.push(new Node(x, y, radius));
                 }
             }
@@ -576,6 +578,10 @@
                 animationFrameId = requestAnimationFrame(animate);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
+                // Set subtle glow effect for lines
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#818CF8'; // Primary color glow
+
                 for (let i = 0; i < nodes.length; i++) {
                     nodes[i].update();
                     
@@ -589,8 +595,9 @@
                             // Calculate opacity based on distance
                             const opacity = 1 - (distance / maxDistance);
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(129, 140, 248, ${opacity * 0.7})`; // Primary color, semi-transparent
-                            ctx.lineWidth = 0.5;
+                            // Increased opacity and line width for more prominence
+                            ctx.strokeStyle = `rgba(129, 140, 248, ${opacity * 0.9})`; 
+                            ctx.lineWidth = 0.8;
                             ctx.moveTo(nodes[i].x, nodes[i].y);
                             ctx.lineTo(nodes[j].x, nodes[j].y);
                             ctx.stroke();
@@ -607,8 +614,9 @@
                         if (distance < maxDistance) {
                             const opacity = 1 - (distance / maxDistance);
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(34, 211, 238, ${opacity * 0.9})`; // Secondary color for mouse lines
-                            ctx.lineWidth = 1;
+                            // Max opacity and thicker line for dramatic mouse connection
+                            ctx.strokeStyle = `rgba(34, 211, 238, ${opacity * 1.0})`; 
+                            ctx.lineWidth = 1.5;
                             ctx.moveTo(nodes[i].x, nodes[i].y);
                             ctx.lineTo(mouse.x, mouse.y);
                             ctx.stroke();
@@ -616,6 +624,9 @@
                         }
                     }
                 }
+                
+                // Clear the shadow blur after drawing lines
+                ctx.shadowBlur = 0;
             }
 
             // Mouse Position Tracking
