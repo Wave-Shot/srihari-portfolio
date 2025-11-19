@@ -27,30 +27,27 @@
         }
     </script>
     <style>
-        /* Custom styles for professional feel and HORIZONTAL SCROLLING */
+        /* Custom styles for professional feel and VERTICAL SCROLLING */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #121212; /* Very dark base background */
             color: #F3F4F6;
-            /* Disable default vertical scroll on the body */
-            overflow-y: hidden;
-            overflow-x: hidden; /* Prevent body scroll, controlled by container */
+            /* Allow normal vertical scrolling */
+            overflow-y: auto; 
+            overflow-x: hidden; /* Prevent horizontal scroll bar */
         }
         
-        /* The container for the sections, handles the horizontal snapping */
+        /* The container for the sections. Reverted to standard block flow */
         #page-container {
-            display: flex;
-            width: 100vw;
-            height: 100vh;
-            overflow-x: scroll;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
+            /* Removed display: flex and height constraints */
+            width: 100%;
+            min-height: 100vh;
         }
 
-        /* Each section is a full viewport width/height panel */
+        /* Each section is a full viewport height panel for a full-page feel */
         .page-section {
-            flex: 0 0 100vw; /* Fixed width of one viewport width */
-            scroll-snap-align: start;
+            /* Removed flex: 0 0 100vw; */
+            width: 100%; /* Take full width */
             padding-top: 6rem; /* Space for the sticky header */
             padding-bottom: 4rem;
             min-height: 100vh;
@@ -107,8 +104,6 @@
             border-radius: 50%;
             border: 2px solid #121212; /* Matches body background */
         }
-        
-        /* Removed old parallax styles, kept only core custom styles */
     </style>
 </head>
 <body class="antialiased">
@@ -120,7 +115,7 @@
                 <!-- Logo/Name -->
                 <a href="#home" class="text-2xl font-bold text-light-text tracking-tight" data-target="home">SRIHARI V</a>
                 
-                <!-- Desktop Links (Controls horizontal scrolling) -->
+                <!-- Desktop Links (Controls scrolling via native smooth scroll) -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                     <a href="#home" class="nav-link text-muted-text font-medium hover:text-primary active-section" data-target="home">Home</a>
                     <a href="#about" class="nav-link text-muted-text font-medium hover:text-primary" data-target="about">About</a>
@@ -148,7 +143,7 @@
         </div>
     </nav>
 
-    <!-- Main Content Container for Horizontal Scrolling -->
+    <!-- Main Content Container for VERTICAL Scrolling -->
     <div id="page-container">
 
         <!-- 1. Hero Section (Home) - Interactive with Network Canvas -->
@@ -433,35 +428,32 @@
 
     <!-- JavaScript for Navigation, Form Handling, and Interactive Canvas -->
     <script>
-        // --- Navigation Logic for Horizontal Scroll ---
+        // --- Navigation Logic for Native Smooth Scroll ---
         const pageContainer = document.getElementById('page-container');
-        // Define the order of sections for accurate scrolling
-        const sections = ['home', 'about', 'skills', 'projects', 'contact'];
         const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .scroll-link');
         
-        // Function to scroll horizontally to a target section
-        function scrollToSection(targetId) {
-            // data-target is used for internal navigation
-            const targetElement = document.getElementById(targetId);
-            if(targetElement) {
-                 targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                    inline: 'start'
-                });
-            }
+        // Function to update active navigation links based on current hash (optional but good practice)
+        function updateActiveLink(targetId) {
+            navLinks.forEach(link => {
+                link.classList.remove('active-section');
+                if (link.getAttribute('data-target') === targetId) {
+                    link.classList.add('active-section');
+                }
+            });
         }
         
         // Add click listeners to all navigational elements
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
-                // Check if the link is a non-internal link (like the PDF link)
+                // For internal links (those with a data-target), allow the default hash change and smooth scroll
                 if (this.hasAttribute('data-target')) {
-                    e.preventDefault();
+                    // Update the active class immediately for feedback
                     const targetId = this.getAttribute('data-target');
                     if (targetId) {
-                        scrollToSection(targetId);
+                        updateActiveLink(targetId);
                     }
+                    
+                    // The 'scroll-smooth' class on HTML tag handles the actual scrolling to the target ID via href="#id"
                     
                     // Close mobile menu after clicking a link
                     const mobileMenu = document.getElementById('mobile-menu');
@@ -471,6 +463,24 @@
                 }
             });
         });
+        
+        // Use Intersection Observer or simply hash change listener for better active state tracking
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                updateActiveLink(hash);
+            }
+        });
+        
+        // Initialize position/active link on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialTarget = window.location.hash.substring(1) || 'home';
+            updateActiveLink(initialTarget);
+            
+            // Ensure canvas starts running on load as it's the home section
+            startCanvasAnimation(); 
+        });
+
 
         // --- Mobile Menu Toggle ---
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
@@ -481,11 +491,29 @@
 
         // --- Interactive Network Canvas Graphic Logic (New Interactive UI) ---
         const canvas = document.getElementById('network-canvas');
+        // This variable is now controlled by startCanvasAnimation/stopCanvasAnimation
+        let animationFrameId = null; 
+        
+        // Helper functions to control the background animation
+        function startCanvasAnimation() {
+             if (canvas && !animationFrameId) {
+                 animationFrameId = requestAnimationFrame(animate);
+             }
+        }
+        
+        // We removed the stopCanvasAnimation logic from the navigation for simplicity in vertical mode
+        // but we'll keep the definition here in case it's used elsewhere
+        function stopCanvasAnimation() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+        }
+        
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let nodes = [];
             let mouse = { x: null, y: null };
-            let animationFrameId;
 
             const maxDistance = 120; // Max distance for lines
             const numNodes = 60; // Number of particles
@@ -622,6 +650,7 @@
             canvas.addEventListener('mousemove', function(e) {
                 // Update mouse position relative to the canvas
                 const rect = canvas.getBoundingClientRect();
+                // Ensure correct offset calculation (important in vertical scroll mode)
                 mouse.x = e.clientX - rect.left;
                 mouse.y = e.clientY - rect.top;
             });
@@ -632,28 +661,6 @@
                 mouse.y = null;
             });
             
-            // Intersection Observer to stop/start animation when not visible (Horizontal Scroll Optimization)
-            const homeSection = document.getElementById('home');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Only start if not already running
-                        if (!animationFrameId) {
-                            animate();
-                        }
-                    } else {
-                        // Stop animation when the home section is out of view
-                        cancelAnimationFrame(animationFrameId);
-                        animationFrameId = null;
-                    }
-                });
-            }, {
-                // Use the page container as the root to detect horizontal visibility
-                root: pageContainer, 
-                threshold: 0.99
-            });
-            
-            observer.observe(homeSection);
         } // End of Canvas Logic
 
 
