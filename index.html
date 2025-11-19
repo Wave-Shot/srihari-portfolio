@@ -15,21 +15,24 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'primary': '#4F46E5', // Indigo 600 - Main accent color
-                        'secondary': '#10B981', // Emerald 500
-                        'dark-bg': '#1F2937', // Gray 800
-                        'dark-text': '#F9FAFB', // Gray 50
+                        // Updated for Dark Theme contrast
+                        'primary': '#818CF8', // Indigo 400 - Main accent, pops on dark
+                        'secondary': '#22D3EE', // Cyan 400 - Vibrant contrast
+                        'dark-bg-main': '#121212', // Very dark background
+                        'dark-bg-card': '#1F2937', // Dark Gray 800 - for sections and cards
+                        'light-text': '#F3F4F6', // Light text color
+                        'muted-text': '#D1D5DB', // Gray 300 - Secondary text color
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom styles for professional feel and scroll behavior */
+        /* Custom styles for professional feel and scroll behavior (DARK THEME) */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB; /* Light gray background */
-            color: #1F2937;
+            background-color: #121212; /* Very dark base background */
+            color: #F3F4F6;
         }
 
         /* Styling for the navigation links on hover */
@@ -37,52 +40,85 @@
             transition: color 0.2s ease-in-out;
         }
         .nav-link:hover {
-            color: #4F46E5;
+            color: #818CF8; /* Primary color hover */
         }
 
         /* Subtle underline effect for headings */
         .section-title::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 70px;
             height: 4px;
-            background-color: #4F46E5;
+            background-color: #818CF8; /* Primary color */
             margin-top: 8px;
             border-radius: 9999px;
+        }
+
+        /* Style for the educational journey flowchart */
+        .journey-item {
+            position: relative;
+            padding-left: 1.5rem; 
+            margin-bottom: 2rem;
+        }
+        .journey-item:last-child {
+            margin-bottom: 0;
+        }
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5px;
+            height: 100%;
+            width: 2px;
+            background-color: #374151; /* Darker line color */
+        }
+        .journey-item:last-child::before {
+            height: 10px; 
+        }
+        .journey-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background-color: #818CF8; /* Primary color dot */
+            border-radius: 50%;
+            border: 2px solid #121212; /* Matches body background */
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Sticky Navigation Bar -->
-    <nav class="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-100">
+    <!-- Sticky Navigation Bar (Dark) -->
+    <nav class="sticky top-0 z-50 bg-dark-bg-card shadow-2xl border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo/Name (Now empty as requested) -->
-                <a href="#home" class="text-2xl font-bold text-gray-900 tracking-tight"></a>
+                <a href="#home" class="text-2xl font-bold text-light-text tracking-tight"></a>
                 
                 <!-- Desktop Links -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="#about" class="nav-link text-gray-600 font-medium hover:text-primary">About</a>
-                    <a href="#skills" class="nav-link text-gray-600 font-medium hover:text-primary">Skills</a>
-                    <a href="#projects" class="nav-link text-gray-600 font-medium hover:text-primary">Projects</a>
-                    <a href="#contact" class="nav-link text-gray-600 font-medium hover:text-primary">Contact</a>
+                    <a href="#about" class="nav-link text-muted-text font-medium hover:text-primary">About</a>
+                    <a href="#skills" class="nav-link text-muted-text font-medium hover:text-primary">Skills</a>
+                    <a href="#projects" class="nav-link text-muted-text font-medium hover:text-primary">Projects</a>
+                    <a href="#contact" class="nav-link text-muted-text font-medium hover:text-primary">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="sm:hidden p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none">
+                <button id="mobile-menu-button" class="sm:hidden p-2 rounded-lg text-muted-text hover:text-light-text hover:bg-gray-700 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
         
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden sm:hidden pb-4 pt-2">
+        <div id="mobile-menu" class="hidden sm:hidden pb-4 pt-2 bg-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Skills</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Projects</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-light-text hover:text-primary hover:bg-gray-700">Contact</a>
             </div>
         </div>
     </nav>
@@ -90,133 +126,151 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        <!-- 1. Hero Section -->
-        <section id="home" class="py-16 md:py-24 flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
+        <!-- 1. Hero Section (Dark Card) -->
+        <section id="home" class="py-16 md:py-24 flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 bg-dark-bg-card rounded-3xl shadow-2xl shadow-indigo-900/10 p-8 lg:p-12 border-b-8 border-primary/50">
             <div class="md:w-3/5">
-                <p class="text-lg text-primary font-medium mb-3 tracking-wider">Hello, I'm Srihari V</p>
-                <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight text-gray-900">
+                <p class="text-lg text-secondary font-bold mb-3 tracking-widest uppercase">Hello, I'm Srihari V</p>
+                <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight text-light-text">
                     AI/ML Engineer & <br class="hidden sm:inline" />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">Application Developer</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-300">Application Developer</span>
                 </h1>
-                <p class="mt-6 text-xl text-gray-600 max-w-lg">
+                <p class="mt-6 text-xl text-muted-text max-w-lg">
                     A B.Tech Innovator specializing in AI/ML, NLP, and Full-Stack Development. I build intelligent, data-driven applications using BERT, Streamlit, FastAPI, and the Gemini API.
                 </p>
-                <!-- START: Removed 'Get In Touch' button as requested -->
-                <div class="mt-10 flex space-x-4">
-                    <a href="#projects" class="px-8 py-3 bg-primary text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">View Projects</a>
+                <!-- Actions: View Projects and Download Resume. Subtle button shadows (shadow-md) -->
+                <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#projects" class="px-8 py-3 bg-primary text-light-text font-semibold rounded-xl shadow-md hover:bg-indigo-500 transition duration-300 transform hover:scale-105 text-center border-2 border-primary">View Projects</a>
+                    
+                    <!-- Download Resume Button: Subtle shadow, no glow -->
+                    <a href="Srihari_Resume_main.pdf" download="Srihari_V_Resume.pdf" class="px-8 py-3 bg-secondary text-light-text font-semibold rounded-xl shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-105 flex items-center justify-center text-center border-2 border-secondary">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download Resume
+                    </a>
                 </div>
-                <!-- END: Removed 'Get In Touch' button -->
             </div>
             <!-- Profile Placeholder (Avatar style) -->
             <div class="md:w-1/4 w-full flex justify-center">
-                <div class="w-48 h-48 bg-gray-200 rounded-full shadow-2xl flex items-center justify-center border-4 border-primary/50">
-                    <span class="text-7xl font-extrabold text-primary">SV</span>
+                <div class="w-48 h-48 bg-secondary/10 rounded-full shadow-2xl shadow-secondary/20 flex items-center justify-center border-4 border-secondary">
+                    <span class="text-7xl font-extrabold text-secondary">SV</span>
                 </div>
             </div>
         </section>
 
-        <div class="border-t border-gray-200 my-16"></div>
+        <div class="border-t border-gray-700 my-16"></div>
 
-        <!-- 2. About Section -->
-        <section id="about" class="py-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-12 section-title">About Me</h2>
+        <!-- 2. About Section (Dark Card) -->
+        <section id="about" class="py-16 bg-dark-bg-card rounded-3xl shadow-xl shadow-indigo-900/10 p-8 lg:p-12">
+            <h2 class="text-3xl font-bold text-light-text mb-12 section-title">About Me & My Journey</h2>
             <div class="grid md:grid-cols-3 gap-10 items-start">
                 <div class="md:col-span-2">
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    <p class="text-lg text-muted-text leading-relaxed mb-4">
                         I am a passionate 4th-year B.Tech student at SRM Institute of Science And Technology (CGPA: 8.06), driven by a deep interest in transforming complex data into robust, user-friendly applications. My academic journey has provided a strong foundation in Python, Java, C/C++, and key frameworks.
                     </p>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        My core expertise lies in the cross-section of AI/ML and full-stack development. I focus on designing and deploying intelligent agents and data dashboards using cutting-edge models like BERT, YOLOv8, and API integration technologies such as the Gemini API and FastAPI.
+                    <!-- Markdown bolding removed, visual emphasis added via span -->
+                    <p class="text-lg text-muted-text leading-relaxed mb-4">
+                        My core expertise lies in the cross-section of <span class="font-semibold text-primary/80">AI/ML and full-stack development</span>. I focus on designing and deploying intelligent agents and data dashboards using cutting-edge models like <span class="font-semibold text-primary/80">BERT, YOLOv8, and API integration technologies</span> such as the Gemini API and FastAPI.
                     </p>
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        I am committed to engineering systems that are not only technically sound but also highly practical, as demonstrated through my work on real-time sentiment analysis and RAG systems.
-                    </p>
-                    <div class="mt-8 text-sm text-gray-500 space-y-1">
-                        <p><strong>Education:</strong> B.Tech (4th Year), SRM Institute of Science And Technology</p>
-                        <p><strong>Certifications:</strong> Fortinet Certified Associate in Cybersecurity, Alteryx Designer Core, AWS Machine Learning Foundations, MATLAB Image Processing.</p>
-                        <p><strong>Awards:</strong> First Prize, Idea Fest (Blockchain); First Prize, Energy Harvesting Model.</p>
+                    
+                    <!-- My Journey Flowchart -->
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-semibold text-light-text mb-6 border-b pb-2 border-gray-700">Educational Path</h3>
+                        <div class="flex flex-col">
+                            <div class="journey-item">
+                                <p class="text-base font-bold text-primary">DAV Boys Senior Secondary School</p>
+                                <p class="text-sm text-muted-text">Completed 10th grade foundation.</p>
+                            </div>
+                            <div class="journey-item">
+                                <p class="text-base font-bold text-primary">Chennai Public School</p>
+                                <p class="text-sm text-muted-text">Completed 12th grade intermediate studies.</p>
+                            </div>
+                            <div class="journey-item">
+                                <p class="text-base font-bold text-primary">SRM Institute of Science and Technology</p>
+                                <p class="text-sm text-muted-text">B.Tech, currently focused on AI/ML and development.</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="mt-8 text-sm text-muted-text space-y-1 p-4 bg-primary/10 rounded-lg border border-primary/30">
+                        <p><span class="font-semibold">Education:</span> B.Tech (4th Year), SRM Institute of Science And Technology</p>
+                        <p><span class="font-semibold">Certifications:</span> Fortinet Certified Associate in Cybersecurity, Alteryx Designer Core, AWS Machine Learning Foundations, MATLAB Image Processing.</p>
+                        <p><span class="font-semibold">Awards:</span> First Prize, Idea Fest (Blockchain); First Prize, Energy Harvesting Model.</p>
+                    </div>
+
                 </div>
-                <div class="md:col-span-1 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-                    <h3 class="text-xl font-semibold mb-4 text-primary">Contact Details</h3>
-                    <ul class="space-y-3 text-gray-700">
-                        <li>
-                            <p class="font-medium text-gray-900">Email:</p>
-                            <a href="mailto:stiharivenkat@gmail.com" class="text-primary hover:underline">stiharivenkat@gmail.com</a>
+                <div class="md:col-span-1 bg-dark-bg-main p-6 rounded-xl shadow-xl shadow-secondary/10 border border-secondary/30">
+                    <h3 class="text-xl font-bold mb-4 text-secondary border-b pb-2 border-secondary/50">Contact Details</h3>
+                    <ul class="space-y-4 text-light-text">
+                        <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <p class="font-medium text-light-text">Email:</p>
+                            <a href="mailto:stiharivenkat@gmail.com" class="text-primary hover:underline font-bold">stiharivenkat@gmail.com</a>
                         </li>
-                        <li>
-                            <p class="font-medium text-gray-900">Phone:</p>
-                            <a href="tel:+919176782397" class="text-primary hover:underline">+91 9176782397</a>
+                        <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <p class="font-medium text-light-text">LinkedIn:</p>
+                            <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-primary hover:underline font-bold">Connect on LinkedIn</a>
                         </li>
-                        <li>
-                            <p class="font-medium text-gray-900">LinkedIn:</p>
-                            <!-- CORRECTED LINK -->
-                            <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-primary hover:underline">linkedin/srihari-v-592801252/</a>
-                        </li>
-                        <li>
-                            <p class="font-medium text-gray-900">GitHub:</p>
-                            <!-- UPDATED GITHUB LINK -->
-                            <a href="https://github.com/Wave-Shot" target="_blank" class="text-primary hover:underline">github/Wave-Shot</a>
+                        <li class="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                            <p class="font-medium text-light-text">GitHub:</p>
+                            <a href="https://github.com/Wave-Shot" target="_blank" class="text-primary hover:underline font-bold">github/Wave-Shot</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <div class="border-t border-gray-200 my-16"></div>
+        <div class="border-t border-gray-700 my-16"></div>
 
         <!-- 3. Skills Section -->
         <section id="skills" class="py-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-12 section-title">Core Competencies</h2>
+            <h2 class="text-3xl font-bold text-light-text mb-12 section-title">Core Competencies</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
 
                 <!-- Skill Category: AI/ML & NLP -->
-                <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-primary">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l2-2 2 2v13M9 19h12M9 19c0 1.105-1.79 2-4 2s-4-.895-4-2h8zM15 19v-6h-6v6"></path></svg>
+                <div class="p-6 bg-dark-bg-card rounded-xl shadow-xl shadow-indigo-900/10 hover:shadow-2xl transition duration-300 border-t-8 border-primary hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-light-text mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l2-2 2 2v13M9 19h12M9 19c0 1.105-1.79 2-4 2s-4-.895-4-2h8zM15 19v-6h-6v6"></path></svg>
                         AI/ML & NLP
                     </h3>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li><span class="font-medium text-gray-900">Models:</span> BERT, YOLOv8, VADER</li>
+                    <ul class="space-y-2 text-muted-text text-sm list-disc pl-5">
+                        <li class="text-light-text"><span class="font-medium">Models:</span> BERT, YOLOv8, VADER</li>
                         <li>Hugging Face, Text Blob, Gemini API</li>
                         <li>AWS Machine Learning</li>
                     </ul>
                 </div>
 
                 <!-- Skill Category: Frameworks & Full-Stack -->
-                <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-secondary">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                <div class="p-6 bg-dark-bg-card rounded-xl shadow-xl shadow-cyan-900/10 hover:shadow-2xl transition duration-300 border-t-8 border-secondary hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-light-text mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                         Frameworks & Tools
                     </h3>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li>Streamlit, Gradio (Dashboards)</li>
+                    <ul class="space-y-2 text-muted-text text-sm list-disc pl-5">
+                        <li class="text-light-text">Streamlit, Gradio (Dashboards)</li>
                         <li>FastAPI (Endpoints)</li>
                         <li>JavaFX (GUI), Git/GitHub</li>
                     </ul>
                 </div>
 
                 <!-- Skill Category: Languages -->
-                <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-primary/70">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-primary/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2-2m2 2l-2 2M15 22v-6m-4 6v-6M4 7l2-2m-2 2l2 2"></path></svg>
+                <div class="p-6 bg-dark-bg-card rounded-xl shadow-xl shadow-indigo-900/10 hover:shadow-2xl transition duration-300 border-t-8 border-primary/70 hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-light-text mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-primary/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2-2m2 2l-2 2M15 22v-6m-4 6v-6M4 7l2-2m-2 2l2 2"></path></svg>
                         Languages
                     </h3>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li>Python (Primary)</li>
+                    <ul class="space-y-2 text-muted-text text-sm list-disc pl-5">
+                        <li class="text-light-text">Python (Primary)</li>
                         <li>C, C++</li>
                         <li>Java</li>
                     </ul>
                 </div>
 
                 <!-- Skill Category: Databases & Others -->
-                <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-secondary/70">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <svg class="w-6 h-6 mr-2 text-secondary/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7M4 7l6 6 4-4 6 6M4 7h16"></path></svg>
+                <div class="p-6 bg-dark-bg-card rounded-xl shadow-xl shadow-cyan-900/10 hover:shadow-2xl transition duration-300 border-t-8 border-secondary/70 hover:scale-[1.02]">
+                    <h3 class="text-xl font-bold text-light-text mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-secondary/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7M4 7l6 6 4-4 6 6M4 7h16"></path></svg>
                         Data & Systems
                     </h3>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li>SQLite, MySQL</li>
+                    <ul class="space-y-2 text-muted-text text-sm list-disc pl-5">
+                        <li class="text-light-text">SQLite, MySQL</li>
                         <li>FAISS (Vector Indexing)</li>
                         <li>Mission-Critical Systems Design</li>
                     </ul>
@@ -224,102 +278,178 @@
             </div>
         </section>
 
-        <div class="border-t border-gray-200 my-16"></div>
+        <div class="border-t border-gray-700 my-16"></div>
 
         <!-- 4. Projects Section -->
         <section id="projects" class="py-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-12 section-title">Featured Projects</h2>
+            <h2 class="text-3xl font-bold text-light-text mb-12 section-title">Featured Projects</h2>
             <div class="space-y-12">
                 
                 <!-- Project 1: Test Case Generator for Digital Products -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-indigo-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-primary">
                     <h3 class="text-2xl font-bold text-primary mb-2">AI-Powered Test Case Generator</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-mono">Streamlit | Gemini API | Image Processing</p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Developed a cutting-edge AI application that automatically generates structured testing documentation from raw UI screenshots. This project leverages the Google Gemini API to analyze uploaded product images, extract UI context, and produce detailed test cases, including preconditions, steps, and expected results. The interface is built with Streamlit for seamless, secure user experience.
+                    <p class="text-sm text-secondary mb-4 font-mono">Streamlit | Gemini API | Image Processing</p>
+                    <p class="text-muted-text leading-relaxed">
+                        Developed a cutting-edge AI application that automatically generates structured testing documentation from raw UI screenshots. This project leverages the <span class="font-semibold text-primary/70">Google Gemini API</span> to analyze uploaded product images, extract UI context, and produce detailed test cases, including preconditions, steps, and expected results. The interface is built with Streamlit for seamless, secure user experience.
                     </p>
                 </div>
 
                 <!-- Project 2: RAG System Chat Learn -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-cyan-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-secondary">
                     <h3 class="text-2xl font-bold text-primary mb-2">RAG System: Intelligent Agent & Search</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-mono">FastAPI | FAISS | Sentence Transformers | Agentic Reasoning</p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Engineered a sophisticated Retrieval-Augmented Generation (RAG) system for educational content. The system processes and chunks NCERT PDFs into embeddings using Sentence Transformers and indexes them with FAISS for fast semantic search. It's served by FastAPI with an intelligent agent layer capable of selective tool invocation (e.g., Wikipedia search), demonstrating multi-source synthesis and advanced agentic reasoning.
+                    <p class="text-sm text-secondary mb-4 font-mono">FastAPI | FAISS | Sentence Transformers | Agentic Reasoning</p>
+                    <p class="text-muted-text leading-relaxed">
+                        Engineered a sophisticated <span class="font-semibold text-primary/70">Retrieval-Augmented Generation (RAG)</span> system for educational content. The system processes and chunks NCERT PDFs into embeddings using Sentence Transformers and indexes them with FAISS for fast semantic search. It's served by FastAPI with an intelligent agent layer capable of selective tool invocation (e.g., Wikipedia search), demonstrating multi-source synthesis and advanced agentic reasoning.
                     </p>
                 </div>
 
                 <!-- Project 3: Social Media Sentiment Analysis -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-indigo-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-primary/70">
                     <h3 class="text-2xl font-bold text-primary mb-2">Real-Time Social Media Sentiment Dashboard</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-mono">Streamlit | BERT | VADER | Reddit/YouTube Data</p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Developed a real-time sentiment analysis dashboard for dynamic public opinion insights. The system integrates multiple models (BERT, VADER, TextBlob) to analyze live data streams from platforms like Reddit and YouTube. The results are visualized seamlessly within a Streamlit dashboard, providing immediate and actionable decision-making support based on sentiment trends.
+                    <p class="text-sm text-secondary mb-4 font-mono">Streamlit | BERT | VADER | Reddit/YouTube Data</p>
+                    <p class="text-muted-text leading-relaxed">
+                        Developed a real-time sentiment analysis dashboard for dynamic public opinion insights. The system integrates multiple models (<span class="font-semibold text-primary/70">BERT, VADER, TextBlob</span>) to analyze live data streams from platforms like Reddit and YouTube. The results are visualized seamlessly within a Streamlit dashboard, providing immediate and actionable decision-making support based on sentiment trends.
                     </p>
                 </div>
 
                 <!-- Project 4: MediTrack Pharmacy Inventory System -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-cyan-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-secondary/70">
                     <h3 class="text-2xl font-bold text-primary mb-2">MediTrack Pharmacy Inventory System</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-mono">Streamlit | SQLite | Full-Stack Development</p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Designed and implemented an end-to-end pharmacy inventory and payment management system using Streamlit and SQLite. Features include dynamic modules for low-stock detection, restocking workflows, supplier ticketing, secure payment handling, and integrated role-based access for pharmacists and suppliers. This demonstrates strong practical full-stack and database management skills.
+                    <p class="text-sm text-secondary mb-4 font-mono">Streamlit | SQLite | Full-Stack Development</p>
+                    <p class="text-muted-text leading-relaxed">
+                        Designed and implemented an end-to-end pharmacy inventory and payment management system using Streamlit and <span class="font-semibold text-primary/70">SQLite</span>. Features include dynamic modules for low-stock detection, restocking workflows, supplier ticketing, secure payment handling, and integrated role-based access for pharmacists and suppliers. This demonstrates strong practical full-stack and database management skills.
                     </p>
                 </div>
 
             </div>
         </section>
 
-        <div class="border-t border-gray-200 my-16"></div>
+        <div class="border-t border-gray-700 my-16"></div>
 
         <!-- 5. Contact Section -->
-        <section id="contact" class="py-16 bg-white rounded-3xl shadow-xl px-8 sm:px-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8 section-title">Let's Connect</h2>
-            <p class="text-xl text-gray-600 mb-10">
+        <section id="contact" class="py-16 bg-dark-bg-card rounded-3xl shadow-xl shadow-cyan-900/10 px-4 sm:px-12 border-t-8 border-secondary/50">
+            <h2 class="text-3xl font-bold text-light-text mb-8 section-title">Let's Connect</h2>
+            <p class="text-xl text-muted-text mb-10">
                 I'm actively seeking roles and collaborations where I can apply my skills in AI/ML and application development. Feel free to reach out!
             </p>
-            <!-- START: Changed Email to a text block and updated LinkedIn button styling -->
-            <div class="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-8 items-start sm:items-center">
-                <!-- Email Text Block (Replaced Button) -->
-                <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 w-full sm:w-auto">
-                    <p class="text-sm font-semibold text-gray-600 mb-1">Direct Email</p>
-                    <a href="mailto:stiharivenkat@gmail.com" class="flex items-center space-x-2 text-lg text-primary hover:text-indigo-700 font-medium transition duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h12a2 2 0 002-2v-7"></path></svg>
-                        <span>stiharivenkat@gmail.com</span>
-                    </a>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                
+                <!-- Contact Details -->
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Contact Information</h3>
+                    <div class="p-6 rounded-xl bg-dark-bg-main border border-secondary/30 space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h12a2 2 0 002-2v-7"></path></svg>
+                            <div>
+                                <p class="text-sm font-semibold text-muted-text">Email Address</p>
+                                <a href="mailto:stiharivenkat@gmail.com" class="text-lg text-primary hover:text-indigo-500 font-bold break-all">stiharivenkat@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            <div>
+                                <p class="text-sm font-semibold text-muted-text">LinkedIn Profile</p>
+                                <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="text-lg text-primary hover:text-indigo-500 font-bold">Connect Here</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- LinkedIn Button (Kept) -->
-                <a href="https://www.linkedin.com/in/srihari-v-592801252/" target="_blank" class="flex items-center space-x-3 px-8 py-4 bg-secondary text-white font-semibold rounded-xl shadow-lg hover:bg-emerald-600 transition duration-300 transform hover:scale-105">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.529-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-                    <span>Connect on LinkedIn</span>
-                </a>
+                <!-- Message Form -->
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Send Me a Message</h3>
+                    <form id="contact-form" class="space-y-4 p-6 bg-dark-bg-main rounded-xl border border-primary/30">
+                        <div>
+                            <label for="name" class="block text-sm font-bold text-muted-text">Your Name</label>
+                            <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-bold text-muted-text">Your Email</label>
+                            <input type="email" id="sender-email" name="sender-email" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-bold text-muted-text">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary"></textarea>
+                        </div>
+                        
+                        <!-- Contact Button: Subtle shadow, no glow -->
+                        <button type="submit" class="w-full px-4 py-3 bg-secondary text-light-text font-semibold rounded-lg shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.01]">
+                            Send Email Notification
+                        </button>
+
+                        <p id="form-message" class="text-center text-sm font-medium text-gray-400 hidden mt-3"></p>
+                    </form>
+                </div>
             </div>
-            <!-- END: Contact section changes -->
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark-bg text-dark-text py-8 mt-16">
+    <!-- Footer (Dark) -->
+    <footer class="bg-dark-bg-card text-muted-text py-8 mt-16 border-t border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-sm">&copy; 2025 Srihari V. Built with Tailwind CSS.</p>
+            <p class="text-sm">&copy; 2025 Srihari V. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu Toggle -->
+    <!-- JavaScript for Mobile Menu Toggle and Mailto Form Handling -->
     <script>
+        // Mobile Menu Toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
 
         // Close mobile menu on link click
-        document.querySelectorAll('#mobile-menu a').forEach(item => {
+        document.querySelectorAll('a[href^="#"]').forEach(item => {
             item.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                }
             });
         });
+
+        // Form Submission Handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const senderEmail = document.getElementById('sender-email').value;
+            const message = document.getElementById('message').value;
+            const formMessage = document.getElementById('form-message');
+            
+            // Recipient Email (Your address)
+            const recipientEmail = 'stiharivenkat@gmail.com';
+            
+            // Construct Subject and Body for mailto
+            const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+            const body = encodeURIComponent(
+                `Sender Name: ${name}\n` +
+                `Sender Email: ${senderEmail}\n\n` +
+                `Message:\n${message}`
+            );
+
+            // Construct mailto link
+            const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+
+            // Open the user's default email client
+            window.location.href = mailtoLink;
+
+            // Display success/instruction message
+            formMessage.classList.remove('hidden');
+            formMessage.classList.remove('text-red-500');
+            formMessage.classList.add('text-primary');
+            formMessage.textContent = 'Your email client should open now. Please hit "Send" to complete the message.';
+            
+            // Reset form for clean look after potential submission
+            setTimeout(() => {
+                document.getElementById('contact-form').reset();
+                formMessage.classList.add('hidden');
+            }, 8000);
+        });
+
     </script>
 </body>
 </html>
