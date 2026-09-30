@@ -183,7 +183,7 @@
                             </div>
                             
                             <!-- View Resume Button moved here -->
-                            <a href="https://drive.google.com/file/d/1oZeQAI8502uAHT8ak4x7MSoxQtiNXpZE/view?usp=drivesdk">
+                            <a href="https://drive.google.com/file/d/1oZeQAI8502uAHT8ak4x7MSoxQtiNXpZE/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 bg-secondary/10 text-secondary font-semibold rounded-xl border-2 border-secondary shadow-md hover:bg-secondary hover:text-dark-bg-main transition duration-300 transform hover:scale-105">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 View Resume
                             </a>
@@ -311,12 +311,12 @@
             </div>
         </section>
 
-        <!-- 4. Projects Section (UNCHANGED) -->
+        <!-- 4. Projects Section -->
         <section id="projects" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
             <h2 class="text-3xl font-bold text-light-text mb-12 section-title">Featured Projects</h2>
             <div class="space-y-12">
                 
-                <!-- Project 1: Test Case Generator for Digital Products -->
+                <!-- Project 1: Document Intelligence Pipeline -->
                 <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-indigo-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-primary">
                     <h3 class="text-2xl font-bold text-primary mb-2">Document Intelligence Pipeline - Autonomous Multi-Agent System for Extracting Structured Data from Arbitrary Documents</h3>
                     <p class="text-sm text-secondary mb-4 font-mono">Python API | Sarvam Document AI (Vision 1.5) | Sarvam Digitise | Groq | Pydantic | Pytest
@@ -324,31 +324,35 @@
                     <p class="text-muted-text leading-relaxed">
                        Developed a multi-agent Document Intelligence Pipeline that automates document classification, information extraction and validation. The system uses Sarvam Document AI and Sarvam Digitise for OCR and document processing, Groq for intelligent extraction and reasoning and FastAPI + Pydantic for building and validating APIs.The pipeline consists of three agents: Classification Agent, Extraction Agent, and Validation Agent, enabling structured, reliable information extraction from unstructured documents.
                     </p>
+                    <div class="mt-6">
+                        <a href="https://github.com/Wave-Shot/document-intelligence-pipeline" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-2 bg-primary/10 text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-light-text transition duration-300">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"></path></svg>
+                            View on GitHub
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Project 2: Vaani Support -->
                 <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-cyan-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-secondary/70">
                     <h3 class="text-2xl font-bold text-primary mb-2">Vaani Support - Multilingual Dialect-Aware AI Voice Customer Support System</h3>
                     <p class="text-sm text-secondary mb-4 font-mono">Next.js | Sarvam AI APIs | Saaras v3| Sarvam-M | Bulbul v3 | MongoDB Atlas</p>
                     <p class="text-muted-text leading-relaxed">
                        A multilingual, dialect-aware AI voice customer-support system designed to reduce wait times, repetitive support queries, and language barriers. It converts user's speech to text using Sarvam Saaras v3, identifies the user's intent and routes queries to various departments, generates an LLM-based response and converts it back into natural speech using Sarvam Bulbul v3. It also uses MongoDB for storing conversation sessions and analytics with a Next.js frontend.
                     </p>
+                    <div class="mt-6">
+                        <a href="https://github.com/Wave-Shot/vaani-support" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-2 bg-primary/10 text-primary font-semibold rounded-lg border-2 border-primary hover:bg-primary hover:text-light-text transition duration-300">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"></path></svg>
+                            View on GitHub
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Project 2: RAG System Chat Learn -->
-                <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-cyan-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-secondary">
-                    <h3 class="text-2xl font-bold text-primary mb-2">RAG System: Intelligent Agent & Search</h3>
-                    <p class="text-sm text-secondary mb-4 font-mono">FastAPI | FAISS | Sentence Transformers | Agentic Reasoning</p>
-                    <p class="text-muted-text leading-relaxed">
-                        Engineered a sophisticated <span class="font-semibold text-primary/70">Retrieval-Augmented Generation (RAG)</span> system for educational content. The system processes and chunks NCERT PDFs into embeddings using Sentence Transformers and indexes them with FAISS for fast semantic search. It's served by FastAPI with an intelligent agent layer capable of selective tool invocation (e.g., Wikipedia search), demonstrating multi-source synthesis and advanced agentic reasoning.
-                    </p>
-                </div>
-
-                <!-- Project 3: Social Media Sentiment Analysis -->
+                <!-- Project 3: Social Media Sentiment Analysis (Research Project) -->
                 <div class="bg-dark-bg-card p-8 rounded-2xl shadow-xl shadow-indigo-900/10 hover:shadow-2xl transition duration-300 border-l-8 border-primary/70">
                     <h3 class="text-2xl font-bold text-primary mb-2">Real-Time Social Media Sentiment Dashboard</h3>
-                    <p class="text-sm text-secondary mb-4 font-mono">Streamlit | BERT | VADER | Reddit/YouTube Data</p>
+                    <p class="text-sm text-secondary mb-4 font-mono">Research Project | Streamlit | BERT | VADER | Reddit/YouTube Data</p>
                     <p class="text-muted-text leading-relaxed">
-                        Developed a real-time sentiment analysis dashboard for dynamic public opinion insights. The system integrates multiple models (<span class="font-semibold text-primary/70">BERT, VADER, TextBlob</span>) to analyze live data streams from platforms like Reddit and YouTube. The results are visualized seamlessly within a Streamlit dashboard, providing immediate and actionable decision-making support based on sentiment trends.
+                        A research project on real-time sentiment analysis for dynamic public opinion insights. The system integrates multiple models (<span class="font-semibold text-primary/70">BERT, VADER, TextBlob</span>) to analyze live data streams from platforms like Reddit and YouTube, with results visualized in a Streamlit dashboard for decision-making support based on sentiment trends. The research paper was accepted and presented at the <span class="font-semibold text-primary/70">MIKE 2025 conference</span>.
                     </p>
                 </div>
 
@@ -356,7 +360,7 @@
             </div>
         </section>
 
-        <!-- 5. Contact Section (UNCHANGED) -->
+        <!-- 5. Contact Section -->
         <section id="contact" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
             <div class="bg-dark-bg-card rounded-3xl shadow-xl shadow-cyan-900/10 px-4 sm:px-12 py-12 border-t-8 border-secondary/50">
                 <h2 class="text-3xl font-bold text-light-text mb-8 section-title">Let's Connect</h2>
@@ -364,11 +368,11 @@
                     I'm actively seeking roles and collaborations where I can apply my skills in AI/ML and application development. Feel free to reach out!
                 </p>
 
-                <div class="grid md:grid-cols-2 gap-10">
+                <div class="flex justify-center">
                     
-                    <!-- Contact Details -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-primary mb-4">Contact Information</h3>
+                    <!-- Contact Details (centered) -->
+                    <div class="w-full max-w-xl">
+                        <h3 class="text-2xl font-bold text-primary mb-4 text-center">Contact Information</h3>
                         <div class="p-6 rounded-xl bg-dark-bg-main border border-secondary/30 space-y-4">
                             <div class="flex items-start space-x-3">
                                 <svg class="w-7 h-7 flex-shrink-0 text-primary mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 4v7a2 2 0 002 2h12a2 2 0 002-2v-7M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -387,31 +391,6 @@
                         </div>
                     </div>
 
-                    <!-- Message Form -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-primary mb-4">Send Me a Message</h3>
-                        <form id="contact-form" class="space-y-4 p-6 bg-dark-bg-main rounded-xl border border-primary/30">
-                            <div>
-                                <label for="name" class="block text-sm font-bold text-muted-text">Your Name</label>
-                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-bold text-muted-text">Your Email</label>
-                                <input type="email" id="sender-email" name="sender-email" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-bold text-muted-text">Message</label>
-                                <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-600 bg-gray-800 text-light-text rounded-lg shadow-sm focus:ring-secondary focus:border-secondary"></textarea>
-                            </div>
-                            
-                            <!-- Contact Button: Subtle shadow, no glow -->
-                            <button type="submit" class="w-full px-4 py-3 bg-secondary text-light-text font-semibold rounded-lg shadow-md hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.01]">
-                                Send Email Notification
-                            </button>
-
-                            <p id="form-message" class="text-center text-sm font-medium text-gray-400 hidden mt-3"></p>
-                        </form>
-                    </div>
                 </div>
             </div>
         </section>
@@ -425,7 +404,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Navigation, Form Handling, and Interactive Canvas -->
+    <!-- JavaScript for Navigation and Interactive Canvas -->
     <script>
         // --- Navigation Logic for Native Smooth Scroll ---
         const pageContainer = document.getElementById('page-container');
@@ -661,46 +640,6 @@
             });
             
         } // End of Canvas Logic
-
-
-        // --- Form Submission Handler (Mailto - UNCHANGED) ---
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const senderEmail = document.getElementById('sender-email').value;
-            const message = document.getElementById('message').value;
-            const formMessage = document.getElementById('form-message');
-            
-            // The recipient email from the resume content
-            const recipientEmail = 'stiharivenkat@gmail.com'; 
-            
-            // Construct Subject and Body for mailto
-            const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-            const body = encodeURIComponent(
-                `Sender Name: ${name}\n` +
-                `Sender Email: ${senderEmail}\n\n` +
-                `Message:\n${message}`
-            );
-
-            // Construct mailto link
-            const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-
-            // Open the user's default email client
-            window.location.href = mailtoLink;
-
-            // Display success/instruction message
-            formMessage.classList.remove('hidden');
-            formMessage.classList.remove('text-red-500');
-            formMessage.classList.add('text-primary');
-            formMessage.textContent = 'Your email client should open now. Please hit "Send" to complete the message.';
-            
-            // Reset form for clean look after potential submission
-            setTimeout(() => {
-                document.getElementById('contact-form').reset();
-                formMessage.classList.add('hidden');
-            }, 8000);
-        });
 
     </script>
 </body>
